@@ -1,9 +1,11 @@
 export const site = {
   name: "Gomzi Life Science LLP",
-  phone: "+91 83200 77993",
-  phoneHref: "+918320077993",
-  email: "export@gomzilifesciences.in",
-  domesticEmail: "info@gomzilifesciences.in",
+  phone: "+91 96646 06980",
+  phoneHref: "+919664606980",
+  phoneSecondary: "+91 7600 788 188",
+  phoneSecondaryHref: "+917600788188",
+  whatsappHref: "919664606980",
+  email: "exports@gomzilifescience.com",
   address:
     "443, 444, 445, 1st Floor, RJD Textile Park, At. Ichchhapor, Hazira Road, Surat - 394510, Gujarat, India.",
   corporateAddress:

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, MessageCircle, ArrowUpRight, Send, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { site } from '../data/site';
+import { countries } from '../data/countries';
+import { submitInquiry } from '../services/inquiry';
 import './ContactPage.css';
 
 export default function ContactPage({ onInquiry: _onInquiry }: { onInquiry?: () => void }) {
@@ -9,20 +12,33 @@ export default function ContactPage({ onInquiry: _onInquiry }: { onInquiry?: () 
     phone: '',
     email: '',
     company: '',
+    country: '',
     city: '',
     service: 'Private Label Manufacturing',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (sending) return;
+    setSending(true);
+    setError('');
+    try {
+      await submitInquiry({ form: 'contact-page', ...formData });
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Your enquiry could not be sent. Please try again.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleReset = () => {
@@ -31,10 +47,12 @@ export default function ContactPage({ onInquiry: _onInquiry }: { onInquiry?: () 
       phone: '',
       email: '',
       company: '',
+      country: '',
       city: '',
       service: 'Private Label Manufacturing',
       message: ''
     });
+    setError('');
     setSubmitted(false);
   };
 
@@ -66,19 +84,22 @@ export default function ContactPage({ onInquiry: _onInquiry }: { onInquiry?: () 
             
             <div className="contact-items-stack">
               {/* Phone */}
-              <a href="tel:+918320077993" className="contact-item-row group">
+              <div className="contact-item-row group">
                 <div className="contact-icon-pill accent-pill">
                   <Phone className="w-5 h-5 text-accent" />
                 </div>
                 <div>
                   <h3 className="contact-item-label">Contact Number</h3>
-                  <p className="contact-item-val">+91 83200 77993</p>
+                  <p className="contact-item-val">
+                    <a href={`tel:${site.phoneHref}`}>{site.phone}</a><br />
+                    <a href={`tel:${site.phoneSecondaryHref}`}>{site.phoneSecondary}</a>
+                  </p>
                 </div>
-              </a>
+              </div>
 
               {/* WhatsApp */}
               <a
-                href="https://wa.me/918320077993"
+                href={`https://wa.me/${site.whatsappHref}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact-item-row group"
@@ -93,13 +114,13 @@ export default function ContactPage({ onInquiry: _onInquiry }: { onInquiry?: () 
               </a>
 
               {/* Email */}
-              <a href="mailto:info@gomzilifesciences.in" className="contact-item-row group">
+              <a href={`mailto:${site.email}`} className="contact-item-row group">
                 <div className="contact-icon-pill accent-pill">
                   <Mail className="w-5 h-5 text-accent" />
                 </div>
                 <div>
                   <h3 className="contact-item-label">Email Address</h3>
-                  <p className="contact-item-val">info@gomzilifesciences.in</p>
+                  <p className="contact-item-val">{site.email}</p>
                 </div>
               </a>
 
@@ -210,17 +231,39 @@ export default function ContactPage({ onInquiry: _onInquiry }: { onInquiry?: () 
 
                 <div className="contact-form-row">
                   <div className="contact-form-field">
-                    <label htmlFor="contact-city">City / Country</label>
+                    <label htmlFor="contact-country">Country <span>*</span></label>
+                    <select
+                      id="contact-country"
+                      name="country"
+                      required
+                      value={formData.country}
+                      onChange={handleChange}
+                      className="contact-form-select"
+                      autoComplete="country-name"
+                    >
+                      <option value="" disabled>Select country</option>
+                      {countries.map((c) => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="contact-form-field">
+                    <label htmlFor="contact-city">City <span>*</span></label>
                     <input
                       id="contact-city"
                       name="city"
                       type="text"
-                      placeholder="e.g. Mumbai, India / London, UK"
+                      required
+                      placeholder="e.g. Mumbai / London"
                       value={formData.city}
                       onChange={handleChange}
                       className="contact-form-input"
+                      autoComplete="address-level2"
                     />
                   </div>
+                </div>
+
+                <div className="contact-form-row" style={{ gridTemplateColumns: '1fr' }}>
                   <div className="contact-form-field">
                     <label htmlFor="contact-service">Service Required</label>
                     <select
@@ -254,8 +297,9 @@ export default function ContactPage({ onInquiry: _onInquiry }: { onInquiry?: () 
                   />
                 </div>
 
-                <button type="submit" className="contact-form-submit-btn">
-                  <Send size={16} /> Send Project Enquiry
+                {error && <p className="contact-form-error" role="alert">{error}</p>}
+                <button type="submit" className="contact-form-submit-btn" disabled={sending}>
+                  <Send size={16} /> {sending ? 'Sending…' : 'Send Project Enquiry'}
                 </button>
               </form>
             )}

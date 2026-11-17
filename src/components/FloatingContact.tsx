@@ -1,18 +1,23 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Mail, X, CheckCircle2 } from 'lucide-react';
 import { site } from '../data/site';
+import { countries } from '../data/countries';
+import { submitInquiry } from '../services/inquiry';
 
 export default function FloatingContact({ onInquiry: _onInquiry }: { onInquiry?: () => void }) {
   const [collapsed, setCollapsed] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [pinned, setPinned] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
   const [form, setForm] = useState({
     name: '',
     phone: '',
     email: '',
     company: '',
+    country: '',
     city: '',
     message: '',
   });
@@ -91,14 +96,24 @@ export default function FloatingContact({ onInquiry: _onInquiry }: { onInquiry?:
     };
   }, [drawerOpen]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (sending) return;
+    setSending(true);
+    setError('');
+    try {
+      await submitInquiry({ form: 'side-form', ...form });
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Your enquiry could not be sent. Please try again.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleReset = () => {
@@ -107,9 +122,11 @@ export default function FloatingContact({ onInquiry: _onInquiry }: { onInquiry?:
       phone: '',
       email: '',
       company: '',
+      country: '',
       city: '',
       message: '',
     });
+    setError('');
     setSubmitted(false);
   };
 
@@ -148,7 +165,7 @@ export default function FloatingContact({ onInquiry: _onInquiry }: { onInquiry?:
 
           <a
             className="side-tab-whatsapp"
-            href={`https://wa.me/${site.phoneHref.replace('+', '')}?text=${encodeURIComponent('Hello Gomzi team, I would like to discuss a nutraceutical manufacturing project.')}`}
+            href={`https://wa.me/${site.whatsappHref}?text=${encodeURIComponent('Hello Gomzi team, I would like to discuss a nutraceutical manufacturing project.')}`}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat with Gomzi on WhatsApp"
@@ -240,6 +257,20 @@ export default function FloatingContact({ onInquiry: _onInquiry }: { onInquiry?:
                 className="drawer-pill-input"
                 autoComplete="organization"
               />
+              <select
+                name="country"
+                required
+                value={form.country}
+                onChange={handleChange}
+                className="drawer-pill-input drawer-select"
+                autoComplete="country-name"
+                aria-label="Country"
+              >
+                <option value="" disabled>Country*</option>
+                {countries.map((c) => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
               <input
                 type="text"
                 name="city"
@@ -258,8 +289,9 @@ export default function FloatingContact({ onInquiry: _onInquiry }: { onInquiry?:
                 onChange={handleChange}
                 className="drawer-textarea"
               />
-              <button type="submit" className="drawer-submit-btn">
-                SUBMIT
+              {error && <p className="drawer-error" role="alert">{error}</p>}
+              <button type="submit" className="drawer-submit-btn" disabled={sending}>
+                {sending ? 'SENDING…' : 'SUBMIT'}
               </button>
             </form>
           )}

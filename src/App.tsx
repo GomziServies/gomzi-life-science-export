@@ -112,7 +112,7 @@ function Site() {
       </Routes>
       <Footer onInquiry={open} />
       <FloatingContact onInquiry={open} />
-      <InquiryModal open={inquiry} onClose={() => setInquiry(false)} initialFormat="" />
+      <InquiryModal open={inquiry} onClose={() => setInquiry(false)} />
     </>
   );
 }

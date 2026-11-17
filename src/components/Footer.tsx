@@ -51,6 +51,10 @@ export default function Footer({ onInquiry }: { onInquiry: () => void }) {
             <Phone size={17} />
             <span>{site.phone}</span>
           </a>
+          <a href={`tel:${site.phoneSecondaryHref}`}>
+            <Phone size={17} />
+            <span>{site.phoneSecondary}</span>
+          </a>
           <a href={`mailto:${site.email}`}>
             <Mail size={17} />
             <span>{site.email}</span>
@@ -61,7 +65,6 @@ export default function Footer({ onInquiry }: { onInquiry: () => void }) {
           </p>
           <h4>Corporate office</h4>
           <p>{site.corporateAddress}</p>
-          <a href={`mailto:${site.domesticEmail}`}>Domestic: {site.domesticEmail}</a>
         </div>
       </div>
 

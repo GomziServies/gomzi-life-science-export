@@ -228,7 +228,7 @@ export default function DownloadCataloguesPage({ onInquiry }: { onInquiry?: () =
                   </div>
                   <div className="dcp-spec-item">
                     <span>File Size</span>
-                    <strong>10.2 MB</strong>
+                    <strong>10.1 MB</strong>
                   </div>
                   <div className="dcp-spec-item">
                     <span>Certifications</span>
@@ -361,7 +361,7 @@ export default function DownloadCataloguesPage({ onInquiry }: { onInquiry?: () =
                   </div>
                   <div className="dcp-spec-item">
                     <span>File Size</span>
-                    <strong>17.3 MB</strong>
+                    <strong>16.3 MB</strong>
                   </div>
                   <div className="dcp-spec-item">
                     <span>Compliance</span>
