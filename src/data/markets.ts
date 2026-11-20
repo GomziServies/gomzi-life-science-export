@@ -1,10 +1,12 @@
 export const markets = [
-  { id: 'uk', name: 'United Kingdom', shortName: 'UK', region: 'Europe', lon: -0.12, lat: 51.5, description: 'Partnership conversations for the United Kingdom market.' },
+  { id: 'uk', name: 'European Union', shortName: 'EU', region: 'Europe', lon: 4.35, lat: 50.85, description: 'Partnership conversations across the European Union market.' },
+  { id: 'usa', name: 'USA', shortName: 'USA', region: 'North America', lon: -98.5, lat: 39.8, description: 'Exploring nutrition partnerships across the United States market.' },
   { id: 'africa', name: 'African markets', shortName: 'Africa', region: 'Africa', lon: 8.68, lat: 9.08, description: 'Connecting with nutrition brands across African markets. The marker is a regional reference.' },
-  { id: 'dubai', name: 'Dubai, UAE', shortName: 'Dubai', region: 'Middle East', lon: 55.27, lat: 25.2, description: 'A point of connection for the UAE and wider Middle East.' },
+  { id: 'dubai', name: 'Middle East', shortName: 'Middle East', region: 'Middle East', lon: 55.27, lat: 25.2, description: 'Connecting with nutrition brands across the Middle East.' },
   { id: 'sri-lanka', name: 'Sri Lanka', shortName: 'Sri Lanka', region: 'South Asia', lon: 80.77, lat: 7.87, description: 'Exploring nutrition partnerships with Sri Lankan brands.' },
   { id: 'bangladesh', name: 'Bangladesh', shortName: 'Bangladesh', region: 'South Asia', lon: 90.36, lat: 23.68, description: 'Building conversations with brands in Bangladesh.' },
-  { id: 'asia', name: 'Asian markets', shortName: 'Asia', region: 'Asia', lon: 108.28, lat: 14.06, description: 'A broader outlook across Asia. The marker is a regional reference.' },
+  { id: 'asia', name: 'ASEAN Market', shortName: 'ASEAN', region: 'Southeast Asia', lon: 108.28, lat: 14.06, description: 'A broader outlook across the ASEAN market. The marker is a regional reference.' },
+  { id: 'latin-america', name: 'Latin America', shortName: 'Latin America', region: 'Latin America', lon: -55, lat: -15.5, description: 'Exploring nutrition partnerships across Latin American markets.' },
 ];
 
 export const origin = { lon: 72.83, lat: 21.17, name: 'Surat, India' };
@@ -50,6 +52,12 @@ export function getRoutePath(
   } else if (id === 'uk') {
     cx = mx;
     cy = my - 72;
+  } else if (id === 'usa') {
+    cx = mx;
+    cy = my - 72;
+  } else if (id === 'latin-america') {
+    cx = mx;
+    cy = my + 72;
   }
 
   return `M ${start.x.toFixed(1)} ${start.y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${end.x.toFixed(1)} ${end.y.toFixed(1)}`;

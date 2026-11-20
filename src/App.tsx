@@ -57,8 +57,8 @@ function Site() {
             <main id="main-content">
               <Hero />
               <About />
-              <Gallery />
               <Certifications />
+              <Gallery />
               <Services />
               <Clients />
               <Process onInquiry={open} />

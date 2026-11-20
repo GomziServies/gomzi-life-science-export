@@ -163,20 +163,21 @@ export default function FloatingContact({ onInquiry: _onInquiry }: { onInquiry?:
             <span>Enquire Now</span>
           </button>
 
-          <a
-            className="side-tab-whatsapp"
-            href={`https://wa.me/${site.whatsappHref}?text=${encodeURIComponent('Hello Gomzi team, I would like to discuss a nutraceutical manufacturing project.')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat with Gomzi on WhatsApp"
-            title="Chat on WhatsApp"
-          >
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
-              <path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3Zm0 23.6a10.5 10.5 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6Zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-1.8-.8-3.3-2.1-4.3-3.8-.3-.4.3-.6.9-1.6.1-.2.1-.4 0-.6l-1-2.5c-.3-.6-.6-.5-.8-.5h-.7c-.3 0-.6.1-.8.4-.9.8-1.3 1.9-1.2 3.1 0 1.8 1.3 3.5 1.5 3.7s2.5 3.9 6.1 5.4c2.3 1 3.2 1.1 4.4.9.7-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z" />
-            </svg>
-          </a>
         </div>
       </div>
+
+      <a
+        className="side-tab-whatsapp"
+        href={`https://wa.me/${site.whatsappHref}?text=${encodeURIComponent('Hello Gomzi team, I would like to discuss a nutraceutical manufacturing project.')}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with Gomzi on WhatsApp"
+        title="Chat on WhatsApp"
+      >
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+          <path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3Zm0 23.6a10.5 10.5 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6Zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-1.8-.8-3.3-2.1-4.3-3.8-.3-.4.3-.6.9-1.6.1-.2.1-.4 0-.6l-1-2.5c-.3-.6-.6-.5-.8-.5h-.7c-.3 0-.6.1-.8.4-.9.8-1.3 1.9-1.2 3.1 0 1.8 1.3 3.5 1.5 3.7s2.5 3.9 6.1 5.4c2.3 1 3.2 1.1 4.4.9.7-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z" />
+        </svg>
+      </a>
 
       {/* Contact Form Drawer matching Screenshot 3 */}
       {drawerOpen && (

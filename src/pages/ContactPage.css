@@ -409,6 +409,31 @@
 }
 
 @media (max-width: 640px) {
+  .contact-page-wrapper {
+    padding-top: 32px;
+  }
+  .contact-page-inner {
+    padding-inline: 20px;
+    padding-bottom: 48px;
+  }
+  .contact-title {
+    font-size: 34px;
+    line-height: 1.12;
+  }
+  .contact-header {
+    margin-bottom: 32px;
+  }
+  .contact-details-col,
+  .contact-form-col {
+    padding: 28px 20px;
+  }
+  .contact-item-row > div:last-child {
+    min-width: 0;
+  }
+  .contact-item-val,
+  .contact-item-val a {
+    overflow-wrap: anywhere;
+  }
   .contact-form-row {
     grid-template-columns: 1fr;
     gap: 14px;

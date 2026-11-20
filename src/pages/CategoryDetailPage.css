@@ -479,6 +479,17 @@
   }
   .cd-hero h1 {
     font-size: 32px;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+  .cd-breadcrumb {
+    flex-wrap: wrap;
+  }
+  .cd-body {
+    padding-block: 34px 40px;
+  }
+  .cd-main {
+    gap: 30px;
   }
   .cd-ingredients-grid,
   .cd-formats-grid,

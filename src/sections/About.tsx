@@ -115,29 +115,31 @@ export default function About() {
         </div>
       </div>
 
-      <div className="container about-stats" ref={statsRef}>
-        <StatItem
-          target={45}
-          suffix="+"
-          label="Countries in our company profile"
-          inView={statsInView}
-        />
-        <StatItem
-          target={1000}
-          suffix="+"
-          label="Products in our company profile"
-          inView={statsInView}
-        />
-        <StatItem
-          target={100}
-          suffix="%"
-          label="Third-party manufacturing focus"
-          inView={statsInView}
-        />
-        <p>
-          Built around your requirements.<br />
-          From the first brief to the finished product.
-        </p>
+      <div className="about-stats-shell">
+        <div className="container about-stats" ref={statsRef}>
+          <StatItem
+            target={45}
+            suffix="+"
+            label="Countries in our company profile"
+            inView={statsInView}
+          />
+          <StatItem
+            target={1000}
+            suffix="+"
+            label="Products in our company profile"
+            inView={statsInView}
+          />
+          <StatItem
+            target={100}
+            suffix="%"
+            label="Third-party manufacturing focus"
+            inView={statsInView}
+          />
+          <p>
+            Built around your requirements.<br />
+            From the first brief to the finished product.
+          </p>
+        </div>
       </div>
     </section>
   );

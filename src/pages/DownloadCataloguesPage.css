@@ -849,6 +849,35 @@
 }
 
 @media (max-width: 640px) {
+  .dcp-page,
+  .dcp-container,
+  .dcp-catalogue-item,
+  .dcp-catalogue-copy {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .dcp-header h1,
+  .dcp-catalogue-copy h2 {
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+  .dcp-custom-banner {
+    padding: 26px 20px;
+  }
+  .dcp-header {
+    margin-bottom: 32px;
+  }
+  .dcp-catalogue-item {
+    margin-bottom: 36px;
+  }
+  .dcp-sku-section {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-bottom: 1px solid rgba(36, 61, 46, .12);
+  }
+  .dcp-custom-banner {
+    margin-top: 36px;
+  }
   .dcp-container {
     padding-inline: 16px;
   }

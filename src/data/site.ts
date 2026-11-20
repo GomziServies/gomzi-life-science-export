@@ -77,7 +77,6 @@ export const moreLinks = [
     path: "/cdmo-nutraceutical-manufacturer-india",
   },
   { title: "Blog", path: "/blog" },
-  { title: "Affiliate Program", path: "/affiliate-program" },
 ];
 export const routePages = [
   ...navigation,

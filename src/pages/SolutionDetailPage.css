@@ -496,6 +496,17 @@
   }
   .sd-hero h1 {
     font-size: 32px;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+  .sd-breadcrumb {
+    flex-wrap: wrap;
+  }
+  .sd-body {
+    padding-block: 34px 40px;
+  }
+  .sd-main {
+    gap: 30px;
   }
   .sd-highlights,
   .sd-capabilities-grid {

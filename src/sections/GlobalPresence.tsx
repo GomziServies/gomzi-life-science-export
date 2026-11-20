@@ -9,12 +9,14 @@ const marketBadges: Record<
   string,
   { x: number; y: number; w: number; h: number; lineTo: { x: number; y: number } }
 > = {
-  uk: { x: 430, y: 92, w: 126, h: 24, lineTo: { x: 499.7, y: 104.0 } },
-  dubai: { x: 575, y: 182, w: 96, h: 24, lineTo: { x: 653.5, y: 185.6 } },
+  uk: { x: 430, y: 92, w: 126, h: 24, lineTo: { x: 512.1, y: 106.0 } },
+  usa: { x: 270, y: 125, w: 64, h: 24, lineTo: { x: 226.4, y: 140.3 } },
+  dubai: { x: 575, y: 182, w: 108, h: 24, lineTo: { x: 653.5, y: 185.6 } },
   africa: { x: 430, y: 245, w: 126, h: 24, lineTo: { x: 524.1, y: 235.6 } },
   'sri-lanka': { x: 740, y: 276, w: 90, h: 24, lineTo: { x: 724.4, y: 239.4 } },
   bangladesh: { x: 825, y: 178, w: 104, h: 24, lineTo: { x: 751.0, y: 190.3 } },
   asia: { x: 885, y: 226, w: 114, h: 24, lineTo: { x: 800.8, y: 220.2 } },
+  'latin-america': { x: 285, y: 300, w: 118, h: 24, lineTo: { x: 347.2, y: 311.9 } },
 };
 
 const suratBadge = {
@@ -172,10 +174,10 @@ export default function GlobalPresence({ onInquiry }: { onInquiry: () => void })
           >
             <div className="map-svg-wrapper">
               <svg
-                viewBox={isMobile ? '350 45 600 255' : '0 0 1000 450'}
+                viewBox={isMobile ? '200 35 800 340' : '0 0 1000 450'}
                 preserveAspectRatio="xMidYMid meet"
                 role="group"
-                aria-label="World map showing Gomzi in Surat, India connected to United Kingdom, African markets, Dubai UAE, Sri Lanka, Bangladesh, and Asian markets"
+                aria-label="World map showing Gomzi in Surat, India connected to the European Union, USA, African markets, the Middle East, Sri Lanka, Bangladesh, the ASEAN market, and Latin America"
               >
                 {/* World Map Landmasses */}
                 <path d={worldPath} fill="currentColor" stroke="var(--sage)" strokeWidth="0.7" />
@@ -305,16 +307,17 @@ export default function GlobalPresence({ onInquiry }: { onInquiry: () => void })
                   </text>
                 </g>
 
-                {/* Visible Country Pill Badges for all 6 Destination Markets */}
+                {/* Visible destination badges for all export markets */}
                 {markets.map(market => {
                   const badge = marketBadges[market.id];
                   if (!badge) return null;
                   const isSelected = active === market.id;
                   const isHovered = hovered === market.id;
+                  const useSelectedBadgeStyle = isSelected && market.id !== 'uk';
                   return (
                     <g
                       key={`badge-${market.id}`}
-                      className={`map-badge-group${isSelected ? ' is-active' : ''}${isHovered ? ' is-hovered' : ''}`}
+                      className={`map-badge-group${useSelectedBadgeStyle ? ' is-active' : ''}${isHovered ? ' is-hovered' : ''}`}
                       transform={`translate(${badge.x},${badge.y})`}
                       role="button"
                       tabIndex={0}
@@ -373,7 +376,9 @@ export default function GlobalPresence({ onInquiry }: { onInquiry: () => void })
               <span className="map-g" aria-hidden="true">G</span>
               <div>
                 <span>EXPLORING POSSIBILITIES IN</span>
-                <strong>{selected.name}</strong>
+                <strong className={selected.id === 'latin-america' ? 'is-default-text' : undefined}>
+                  {selected.name}
+                </strong>
               </div>
             </div>
           </div>
